@@ -5,7 +5,7 @@ rrdtool graph energy-60d.png -a PNG \
 	--title "Stratum 0 energy consumption – last two months" \
 	--width 800 --height 400 \
 	--lower-limit 0 \
-	-x 'DAY:1:DAY:7:DAY:7:0:%b %d' \
+	-x 'DAY:1:WEEK:1:WEEK:1:0:%b %d' \
 	--vertical-label 'energy (kWh)' \
 	--right-axis 0.27:0 --right-axis-label 'cost (€)' \
 	'DEF:energy=energy.rrd:energy_kWh:AVERAGE:start=end-180d' \
