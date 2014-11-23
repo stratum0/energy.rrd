@@ -15,18 +15,17 @@ rrdtool graph energy-60d.png -a PNG \
 	"CDEF:trend30d=0,1,$((60*60*24*30)),energy,PREDICT" \
 	'VDEF:avg=trend30d,LAST' \
 	'AREA:max#f0f0ff' \
-	'COMMENT:                          ' \
-	'COMMENT:    Min' \
-	'COMMENT:    Avg' \
-	'COMMENT:    Max' \
-	'COMMENT:    Cur\\n' \
-	'LINE1:energy#000000:Energy consumption per day' \
+	'COMMENT:                             ' \
+	'COMMENT:    Min\g' \
+	'COMMENT:    Max\g' \
+	'COMMENT:    Cur\n' \
+	'LINE1:energy#000000:Energy consumption per day ' \
 	'AREA:min#ffffff' \
-	'GPRINT:min:%5.1lf %s' \
-	'GPRINT:avg:%5.1lf %s' \
-	'GPRINT:max:%5.1lf %s' \
-	'GPRINT:last:%5.1lf %s kWh\\n' \
-	'LINE1:trend30d#4040ff:30-day moving average' \
+	'GPRINT:min:  %5.1lf\g' \
+	'GPRINT:max:  %5.1lf\g' \
+	'GPRINT:last:  %5.1lf kWh\\n' \
+	'LINE1:trend30d#4040ff:30-day moving average      ' \
+	'GPRINT:avg:                %5.1lf kWh\n' \
 
 rrdtool graph energy-360d.png -a PNG \
 	--end now --start end-360d \
@@ -42,19 +41,20 @@ rrdtool graph energy-360d.png -a PNG \
 	'VDEF:last=energy,LAST' \
 	"CDEF:trend30d=0,1,$((60*60*24*30)),energy,PREDICT" \
 	"CDEF:trend180d=0,1,$((60*60*24*180)),energy,PREDICT" \
-	'VDEF:avg=trend30d,LAST' \
+	'VDEF:avg30=trend30d,LAST' \
+	'VDEF:avg180=trend180d,LAST' \
 	'AREA:max#f0f0ff' \
-	'COMMENT:                          ' \
-	'COMMENT:    Min' \
-	'COMMENT:    Avg' \
-	'COMMENT:    Max' \
-	'COMMENT:    Cur\\n' \
-	'LINE1:energy#000000:Energy consumption per day' \
+	'COMMENT:                             ' \
+	'COMMENT:    Min\g' \
+	'COMMENT:    Max\g' \
+	'COMMENT:    Cur\n' \
+	'LINE1:energy#000000:Energy consumption per day ' \
 	'AREA:min#ffffff' \
-	'GPRINT:min:%5.1lf %s' \
-	'GPRINT:avg:%5.1lf %s' \
-	'GPRINT:max:%5.1lf %s' \
-	'GPRINT:last:%5.1lf %s kWh\\n' \
-	'LINE1:trend30d#4040ff:30-day moving average\\n' \
-	'LINE1:trend180d#ff4040:180-day moving average' \
+	'GPRINT:min:  %5.1lf\g' \
+	'GPRINT:max:  %5.1lf\g' \
+	'GPRINT:last:  %5.1lf kWh\n' \
+	'LINE1:trend30d#4040ff: 30-day moving average     ' \
+	'GPRINT:avg30:                %5.1lf kWh\n' \
+	'LINE1:trend180d#ff4040:180-day moving average     ' \
+	'GPRINT:avg180:                %5.1lf kWh\n' \
 
