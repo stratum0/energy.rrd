@@ -9,10 +9,12 @@ rrdtool graph energy-60d.png -a PNG \
 	--vertical-label 'energy (kWh)' \
 	--right-axis 0.27:0 --right-axis-label 'cost (€)' \
 	'DEF:energy=energy.rrd:energy_kWh:AVERAGE:start=end-180d' \
+  "SHIFT:energy:$((60*60*24))" \
 	'VDEF:max=energy,MAXIMUM' \
 	'VDEF:min=energy,MINIMUM' \
 	'VDEF:last=energy,LAST' \
 	"CDEF:trend30d=0,1,$((60*60*24*30)),energy,PREDICT" \
+  "SHIFT:trend30d:$((60*60*24))" \
 	'VDEF:avg=trend30d,LAST' \
 	'AREA:max#f0f0ff' \
 	'COMMENT:                             ' \
@@ -36,11 +38,14 @@ rrdtool graph energy-360d.png -a PNG \
 	--vertical-label 'energy (kWh)' \
 	--right-axis 0.27:0 --right-axis-label 'cost (€)' \
 	'DEF:energy=energy.rrd:energy_kWh:AVERAGE:start=end-720d' \
+  "SHIFT:energy:$((60*60*24))" \
 	'VDEF:max=energy,MAXIMUM' \
 	'VDEF:min=energy,MINIMUM' \
 	'VDEF:last=energy,LAST' \
 	"CDEF:trend30d=0,1,$((60*60*24*30)),energy,PREDICT" \
+  "SHIFT:trend30d:$((60*60*24))" \
 	"CDEF:trend180d=0,1,$((60*60*24*180)),energy,PREDICT" \
+  "SHIFT:trend180d:$((60*60*24))" \
 	'VDEF:avg30=trend30d,LAST' \
 	'VDEF:avg180=trend180d,LAST' \
 	'AREA:max#f0f0ff' \
