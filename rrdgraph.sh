@@ -53,13 +53,13 @@ rrdtool graph energy-360d.png -a PNG \
 	'COMMENT:    Min\g' \
 	'COMMENT:    Max\g' \
 	'COMMENT:    Cur\n' \
-	'LINE1:energy#000000:Energy consumption per day ' \
+	'LINE1:energy#80808080:Energy consumption per day ' \
 	'AREA:min#ffffff' \
 	'GPRINT:min:  %5.1lf\g' \
 	'GPRINT:max:  %5.1lf\g' \
 	'GPRINT:last:  %5.1lf kWh\n' \
-	'LINE1:trend30d#4040ff: 30-day moving average     ' \
+	'LINE1:trend30d#4040ffc0: 30-day moving average     ' \
 	'GPRINT:avg30:                %5.1lf kWh\n' \
-	'LINE1:trend180d#ff4040:180-day moving average     ' \
+	'LINE1:trend180d#ff4040c0:180-day moving average     ' \
 	'GPRINT:avg180:                %5.1lf kWh\n' \
 
