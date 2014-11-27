@@ -3,16 +3,25 @@ LC_ALL=C
 COST_PER_KWH="0.27"
 NOW="`LC_ALL=C date|sed -s 's/:/\\\\:/g'`"
 
-rrdtool graph energy-60d.png -a PNG \
-  --pango-markup \
+rrdgraph() {
+  fn=$1
+  shift
+  rrdtool graph $fn -a PNG \
+    --pango-markup \
+    --lower-limit 0 \
+    --x-grid 'WEEK:1:MONTH:1:MONTH:1:0:%b %d' \
+    --y-grid '1:5' \
+    --vertical-label 'energy (kWh)' \
+    --right-axis "${COST_PER_KWH}:0" --right-axis-label 'cost (€)' \
+    --right-axis-format '%3.2lf' \
+    --width 800 \
+    --height 400 \
+    "$@"
+}
+
+rrdgraph energy-60d.png \
   --end now --start end-60d \
   --title "Stratum 0 energy consumption – last two months" \
-  --width 800 --height 400 \
-  --lower-limit 0 \
-  -x 'DAY:1:WEEK:1:WEEK:1:0:%b %d' \
-  --vertical-label 'energy (kWh)' \
-  --right-axis 0.27:0 --right-axis-label 'cost (€)' \
-  --right-axis-format '%3.2lf' \
   'DEF:energy=energy.rrd:energy_kWh:AVERAGE:start=end-180d' \
   "SHIFT:energy:$((60*60*24))" \
   'VDEF:max=energy,MAXIMUM' \
@@ -52,16 +61,10 @@ rrdtool graph energy-60d.png -a PNG \
   'GPRINT:cost30m: %5.1lf €/m\n' \
   "COMMENT:<span size='small' foreground='darkgray'>generated ${NOW}</span>\r" \
 
-rrdtool graph energy-360d.png -a PNG \
-  --pango-markup \
+
+rrdgraph energy-360d.png \
   --end now --start end-360d \
   --title "Stratum 0 energy consumption – last year" \
-  --width 800 --height 400 \
-  --lower-limit 0 \
-  -x 'WEEK:1:MONTH:1:MONTH:1:0:%b %d' \
-  --vertical-label 'energy (kWh)' \
-  --right-axis ${COST_PER_KWH}:0 --right-axis-label 'cost (€)' \
-  --right-axis-format '%3.2lf' \
   'DEF:energy=energy.rrd:energy_kWh:AVERAGE:start=end-720d' \
   "SHIFT:energy:$((60*60*24))" \
   'VDEF:max=energy,MAXIMUM' \
