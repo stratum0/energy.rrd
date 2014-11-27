@@ -19,6 +19,8 @@ rrdtool graph energy-60d.png -a PNG \
   "CDEF:trend30d=0,1,$((60*60*24*30)),energy,PREDICT" \
   "SHIFT:trend30d:$((60*60*24))" \
   'VDEF:avg=trend30d,LAST' \
+  'CDEF:_total_m=trend30d,30,*' \
+  'VDEF:total_m=_total_m,LAST' \
   "CDEF:_cost1d=energy,${COST_PER_KWH},*" \
   'VDEF:cost1d=_cost1d,LAST' \
   "CDEF:_cost30d=trend30d,${COST_PER_KWH},*" \
@@ -28,18 +30,22 @@ rrdtool graph energy-60d.png -a PNG \
   'AREA:max#f0f0ff' \
   'COMMENT:                         │\g' \
   'COMMENT:   Min   Max   Cur       │\g' \
+  "COMMENT:  Projection  │\g" \
   "COMMENT: Cost (at ${COST_PER_KWH} €/kWh)\n" \
   'COMMENT:─────────────────────────┼\g' \
   'COMMENT:─────────────────────────┼\g' \
+  'COMMENT:──────────────┼\g' \
   'COMMENT:──────────────────────\n' \
   'LINE1:energy#80808080:Energy consumption     │\g' \
   'AREA:min#ffffff' \
   'GPRINT:min: %5.1lf\g' \
   'GPRINT:max: %5.1lf\g' \
   'GPRINT:last: %5.1lf kWh/d │\g' \
+  'COMMENT:              │\g' \
   'GPRINT:cost1d: %4.1lf €/d\n' \
   'LINE1:trend30d#4040ffc0:30-day moving average  │\g' \
   'GPRINT:avg:             %5.1lf kWh/d │\g' \
+  'GPRINT:total_m: %6.1lf kWh/m │\g' \
   'GPRINT:cost30d: %4.1lf €/d' \
   'GPRINT:cost30m: %5.1lf €/m\n' \
 
@@ -63,6 +69,10 @@ rrdtool graph energy-360d.png -a PNG \
   "SHIFT:trend180d:$((60*60*24))" \
   'VDEF:avg30=trend30d,LAST' \
   'VDEF:avg180=trend180d,LAST' \
+  'CDEF:_total_m=trend30d,30,*' \
+  'VDEF:total_m=_total_m,LAST' \
+  'CDEF:_total_y=trend180d,365,*' \
+  'VDEF:total_y=_total_y,LAST' \
   "CDEF:_cost1d=energy,${COST_PER_KWH},*" \
   'VDEF:cost1d=_cost1d,LAST' \
   "CDEF:_cost30d=trend30d,${COST_PER_KWH},*" \
@@ -78,22 +88,27 @@ rrdtool graph energy-360d.png -a PNG \
   'AREA:max#f0f0ff' \
   'COMMENT:                         │\g' \
   'COMMENT:   Min   Max   Cur       │\g' \
+  "COMMENT:  Projection   │\g" \
   "COMMENT: Cost (at ${COST_PER_KWH} €/kWh)\n" \
   'COMMENT:─────────────────────────┼\g' \
   'COMMENT:─────────────────────────┼\g' \
+  'COMMENT:───────────────┼\g' \
   'COMMENT:───────────────────────────────────\n' \
   'LINE1:energy#80808080:Energy consumption     │\g' \
   'AREA:min#ffffff' \
   'GPRINT:min: %5.1lf\g' \
   'GPRINT:max: %5.1lf\g' \
   'GPRINT:last: %5.1lf kWh/d │\g' \
+  'COMMENT:               │\g' \
   'GPRINT:cost1d: %4.1lf €/d\n' \
   'LINE1:trend30d#4040ffc0: 30-day moving average │\g' \
   'GPRINT:avg30:             %5.1lf kWh/d │\g' \
+  'GPRINT:total_m: %7.1lf kWh/m │\g' \
   'GPRINT:cost30d: %4.1lf €/d' \
   'GPRINT:cost30m: %5.1lf €/m\n' \
   'LINE1:trend180d#ff4040c0:180-day moving average │\g' \
   'GPRINT:avg180:             %5.1lf kWh/d │\g' \
+  'GPRINT:total_y: %7.1lf kWh/y │\g' \
   'GPRINT:cost180d: %4.1lf €/d' \
   'GPRINT:cost180m: %4.1lf €/m' \
   'GPRINT:cost180y: %6.1lf €/y\n' \
