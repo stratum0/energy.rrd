@@ -1,8 +1,10 @@
 #!/bin/sh
 LC_ALL=C
 COST_PER_KWH="0.27"
+NOW="`LC_ALL=C date|sed -s 's/:/\\\\:/g'`"
 
 rrdtool graph energy-60d.png -a PNG \
+  --pango-markup \
   --end now --start end-60d \
   --title "Stratum 0 energy consumption – last two months" \
   --width 800 --height 400 \
@@ -48,8 +50,10 @@ rrdtool graph energy-60d.png -a PNG \
   'GPRINT:total_m: %6.1lf kWh/m │\g' \
   'GPRINT:cost30d: %4.1lf €/d' \
   'GPRINT:cost30m: %5.1lf €/m\n' \
+  "COMMENT:<span size='small' foreground='darkgray'>generated ${NOW}</span>\r" \
 
 rrdtool graph energy-360d.png -a PNG \
+  --pango-markup \
   --end now --start end-360d \
   --title "Stratum 0 energy consumption – last year" \
   --width 800 --height 400 \
@@ -112,5 +116,6 @@ rrdtool graph energy-360d.png -a PNG \
   'GPRINT:cost180d: %4.1lf €/d' \
   'GPRINT:cost180m: %4.1lf €/m' \
   'GPRINT:cost180y: %6.1lf €/y\n' \
+  "COMMENT:<span size='small' foreground='darkgray'>generated ${NOW}</span>\r" \
 
 # vim: set sw=2 ts=2 et:
