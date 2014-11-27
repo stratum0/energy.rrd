@@ -18,17 +18,17 @@ rrdtool graph energy-60d.png -a PNG \
   "SHIFT:trend30d:$((60*60*24))" \
 	'VDEF:avg=trend30d,LAST' \
 	'AREA:max#f0f0ff' \
-	'COMMENT:                             ' \
+	'COMMENT:                         ' \
 	'COMMENT:    Min\g' \
 	'COMMENT:    Max\g' \
 	'COMMENT:    Cur\n' \
-	'LINE1:energy#000000:Energy consumption per day ' \
+	'LINE1:energy#000000:Energy consumption     ' \
 	'AREA:min#ffffff' \
 	'GPRINT:min:  %5.1lf\g' \
 	'GPRINT:max:  %5.1lf\g' \
-	'GPRINT:last:  %5.1lf kWh\\n' \
-	'LINE1:trend30d#4040ff:30-day moving average      ' \
-	'GPRINT:avg:                %5.1lf kWh\n' \
+	'GPRINT:last:  %5.1lf kWh/d\\n' \
+	'LINE1:trend30d#4040ff:30-day moving average  ' \
+	'GPRINT:avg:                %5.1lf kWh/d\n' \
 
 rrdtool graph energy-360d.png -a PNG \
 	--end now --start end-360d \
@@ -51,17 +51,17 @@ rrdtool graph energy-360d.png -a PNG \
 	'VDEF:avg30=trend30d,LAST' \
 	'VDEF:avg180=trend180d,LAST' \
 	'AREA:max#f0f0ff' \
-	'COMMENT:                             ' \
+	'COMMENT:                         ' \
 	'COMMENT:    Min\g' \
 	'COMMENT:    Max\g' \
 	'COMMENT:    Cur\n' \
-	'LINE1:energy#80808080:Energy consumption per day ' \
+	'LINE1:energy#80808080:Energy consumption     ' \
 	'AREA:min#ffffff' \
 	'GPRINT:min:  %5.1lf\g' \
 	'GPRINT:max:  %5.1lf\g' \
-	'GPRINT:last:  %5.1lf kWh\n' \
-	'LINE1:trend30d#4040ffc0: 30-day moving average     ' \
-	'GPRINT:avg30:                %5.1lf kWh\n' \
-	'LINE1:trend180d#ff4040c0:180-day moving average     ' \
-	'GPRINT:avg180:                %5.1lf kWh\n' \
+	'GPRINT:last:  %5.1lf kWh/d\n' \
+	'LINE1:trend30d#4040ffc0: 30-day moving average ' \
+	'GPRINT:avg30:                %5.1lf kWh/d\n' \
+	'LINE1:trend180d#ff4040c0:180-day moving average ' \
+	'GPRINT:avg180:                %5.1lf kWh/d\n' \
 
