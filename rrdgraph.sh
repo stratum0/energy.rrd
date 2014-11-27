@@ -27,11 +27,10 @@ rrdtool graph energy-60d.png -a PNG \
   'VDEF:cost30m=_cost30m,LAST' \
 	'AREA:max#f0f0ff' \
   'COMMENT:                         │\g' \
-  'COMMENT:   Min\g' \
-  'COMMENT:   Max\g' \
-  'COMMENT:   Cur       │\g' \
+  'COMMENT:   Min   Max   Cur       │\g' \
   "COMMENT: Cost (at ${COST_PER_KWH} €/kWh)\n" \
-  'COMMENT:─────────────────────────┼─────────────────────────┼\g' \
+  'COMMENT:─────────────────────────┼\g' \
+  'COMMENT:─────────────────────────┼\g' \
   'COMMENT:──────────────────────\n' \
   'LINE1:energy#80808080:Energy consumption     │\g' \
 	'AREA:min#ffffff' \
@@ -78,11 +77,10 @@ rrdtool graph energy-360d.png -a PNG \
   'VDEF:cost180y=_cost180y,LAST' \
 	'AREA:max#f0f0ff' \
   'COMMENT:                         │\g' \
-  'COMMENT:   Min\g' \
-  'COMMENT:   Max\g' \
-  'COMMENT:   Cur       │\g' \
+  'COMMENT:   Min   Max   Cur       │\g' \
   "COMMENT: Cost (at ${COST_PER_KWH} €/kWh)\n" \
-  'COMMENT:─────────────────────────┼─────────────────────────┼\g' \
+  'COMMENT:─────────────────────────┼\g' \
+  'COMMENT:─────────────────────────┼\g' \
   'COMMENT:───────────────────────────────────\n' \
   'LINE1:energy#80808080:Energy consumption     │\g' \
 	'AREA:min#ffffff' \
