@@ -1,6 +1,7 @@
 #!/bin/sh
 LC_ALL=C
 COST_PER_KWH="0.2625"
+LIMIT="27.397"    # 10000 kWh / 365 days
 NOW="`LC_ALL=C date|sed -s 's/:/\\\\:/g'`"
 
 rrdgraph() {
@@ -118,7 +119,8 @@ rrdgraph energy-360d.png \
   'GPRINT:total_y: %7.1lf kWh/y │\g' \
   'GPRINT:cost180d: %4.1lf €/d' \
   'GPRINT:cost180m: %4.1lf €/m' \
-  'GPRINT:cost180y: %6.1lf €/y\n' \
+  'GPRINT:cost180y: %6.1lf €/y  ' \
+  "HRULE:$LIMIT"'#ff4040c0:contractual limit of 10,000 kWh/y = 27.3 kWh/d\n:dashes' \
   "COMMENT:<span size='small' foreground='darkgray'>generated ${NOW}</span>\r" \
 
 # vim: set sw=2 ts=2 et:
