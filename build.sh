@@ -23,3 +23,5 @@ if [ -n "$do_rrdupdate" -o "data.csv" -nt "energy.rrd" ]; then
 fi
 
 ./rrdgraph.sh
+
+cp energy-60d.png energy-360d.png /srv/www/stuff/stratum0/

@@ -14,8 +14,8 @@ rrdgraph() {
     --vertical-label 'energy (kWh)' \
     --right-axis "${COST_PER_KWH}:0" --right-axis-label 'cost (€)' \
     --right-axis-format '%3.2lf' \
-    --width 800 \
-    --height 400 \
+    --width 1200 \
+    --height 600 \
     "$@"
 }
 
