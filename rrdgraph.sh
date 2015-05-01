@@ -1,6 +1,6 @@
 #!/bin/sh
 LC_ALL=C
-COST_PER_KWH="0.27"
+COST_PER_KWH="0.2625"
 NOW="`LC_ALL=C date|sed -s 's/:/\\\\:/g'`"
 
 rrdgraph() {
