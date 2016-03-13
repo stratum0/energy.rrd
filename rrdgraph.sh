@@ -39,7 +39,6 @@ rrdgraph energy-60d.png \
   "CDEF:_cost30m=trend30d,30,${COST_PER_KWH},*,*" \
   'VDEF:cost30d=_cost30d,LAST' \
   'VDEF:cost30m=_cost30m,LAST' \
-  'AREA:max#f0f0ff' \
   'COMMENT:                         │\g' \
   'COMMENT:   Min   Max   Cur       │\g' \
   "COMMENT:  Projection  │\g" \
@@ -49,7 +48,6 @@ rrdgraph energy-60d.png \
   'COMMENT:──────────────┼\g' \
   'COMMENT:──────────────────────\n' \
   'LINE1:energy#80808080:Energy consumption     │\g' \
-  'AREA:min#ffffff' \
   'GPRINT:min: %5.1lf\g' \
   'GPRINT:max: %5.1lf\g' \
   'GPRINT:last: %5.1lf kWh/d │\g' \
@@ -93,7 +91,6 @@ rrdgraph energy-360d.png \
   'VDEF:cost180d=_cost180d,LAST' \
   'VDEF:cost180m=_cost180m,LAST' \
   'VDEF:cost180y=_cost180y,LAST' \
-  'AREA:max#f0f0ff' \
   'COMMENT:                         │\g' \
   'COMMENT:   Min   Max   Cur       │\g' \
   "COMMENT:  Projection   │\g" \
@@ -103,7 +100,6 @@ rrdgraph energy-360d.png \
   'COMMENT:───────────────┼\g' \
   'COMMENT:───────────────────────────────────\n' \
   'LINE1:energy#80808080:Energy consumption     │\g' \
-  'AREA:min#ffffff' \
   'GPRINT:min: %5.1lf\g' \
   'GPRINT:max: %5.1lf\g' \
   'GPRINT:last: %5.1lf kWh/d │\g' \
