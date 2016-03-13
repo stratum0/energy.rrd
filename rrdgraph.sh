@@ -3,6 +3,8 @@ LC_ALL=C
 COST_PER_KWH="0.2625"
 LIMIT="27.397"    # 10000 kWh / 365 days
 NOW="`LC_ALL=C date|sed -s 's/:/\\\\:/g'`"
+THIRTYDAYSAGO="`LC_ALL=C date +%s --date='30 days ago 00:00'`"
+SIXMONTHSAGO="`LC_ALL=C date +%s --date='180 days ago 00:00'`"
 
 rrdgraph() {
   fn=$1
@@ -58,6 +60,7 @@ rrdgraph energy-60d.png \
   'GPRINT:total_m: %6.1lf kWh/m │\g' \
   'GPRINT:cost30d: %4.1lf €/d' \
   'GPRINT:cost30m: %5.1lf €/m\n' \
+  "VRULE:${THIRTYDAYSAGO}#8080ffc0:30 days ago\n" \
   "COMMENT:<span size='small' foreground='darkgray'>generated ${NOW}</span>\r" \
 
 
@@ -110,12 +113,14 @@ rrdgraph energy-360d.png \
   'GPRINT:total_m: %7.1lf kWh/m │\g' \
   'GPRINT:cost30d: %4.1lf €/d' \
   'GPRINT:cost30m: %5.1lf €/m\n' \
+  "VRULE:${THIRTYDAYSAGO}#8080ffc0" \
   'LINE1:trend180d#ff4040c0:180-day moving average │\g' \
   'GPRINT:avg180:             %5.1lf kWh/d │\g' \
   'GPRINT:total_y: %7.1lf kWh/y │\g' \
   'GPRINT:cost180d: %4.1lf €/d' \
   'GPRINT:cost180m: %4.1lf €/m' \
   'GPRINT:cost180y: %6.1lf €/y  ' \
+  "VRULE:${SIXMONTHSAGO}#ff8080c0" \
   "HRULE:$LIMIT"'#ff4040c0:contractual limit of 10,000 kWh/y = 27.3 kWh/d\n:dashes' \
   "COMMENT:<span size='small' foreground='darkgray'>generated ${NOW}</span>\r" \
 
