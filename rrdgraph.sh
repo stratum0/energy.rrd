@@ -55,7 +55,7 @@ rrdgraph energy-60d.png \
   'GPRINT:last: %5.1lf kWh/d │\g' \
   'COMMENT:              │\g' \
   'GPRINT:cost1d: %4.1lf €/d\n' \
-  'LINE1:trend30d#4040ffc0:30-day moving average  │\g' \
+  'LINE2:trend30d#0000ffc0:30-day moving average  │\g' \
   'GPRINT:avg:             %5.1lf kWh/d │\g' \
   'GPRINT:total_m: %6.1lf kWh/m │\g' \
   'GPRINT:cost30d: %4.1lf €/d' \
@@ -108,13 +108,13 @@ rrdgraph energy-360d.png \
   'GPRINT:last: %5.1lf kWh/d │\g' \
   'COMMENT:               │\g' \
   'GPRINT:cost1d: %4.1lf €/d\n' \
-  'LINE1:trend30d#4040ffc0: 30-day moving average │\g' \
+  'LINE2:trend30d#0000ffc0: 30-day moving average │\g' \
   'GPRINT:avg30:             %5.1lf kWh/d │\g' \
   'GPRINT:total_m: %7.1lf kWh/m │\g' \
   'GPRINT:cost30d: %4.1lf €/d' \
   'GPRINT:cost30m: %5.1lf €/m\n' \
   "VRULE:${THIRTYDAYSAGO}#8080ffc0" \
-  'LINE1:trend180d#ff4040c0:180-day moving average │\g' \
+  'LINE2:trend180d#ff0000c0:180-day moving average │\g' \
   'GPRINT:avg180:             %5.1lf kWh/d │\g' \
   'GPRINT:total_y: %7.1lf kWh/y │\g' \
   'GPRINT:cost180d: %4.1lf €/d' \
