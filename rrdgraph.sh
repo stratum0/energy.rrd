@@ -15,8 +15,8 @@ rrdgraph() {
     --lower-limit 0 \
     --x-grid 'WEEK:1:MONTH:1:MONTH:1:0:%b %d' \
     --y-grid '1:5' \
-    --vertical-label 'energy (kWh)' \
-    --right-axis "${COST_PER_KWH}:0" --right-axis-label 'cost (€)' \
+    --vertical-label 'energy consumption per day [kWh/d]' \
+    --right-axis "${COST_PER_KWH}:0" --right-axis-label 'cost per day [€/d]' \
     --right-axis-format '%3.2lf' \
     --width 1200 \
     --height 600 \
