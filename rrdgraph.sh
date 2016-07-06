@@ -3,6 +3,7 @@ LC_ALL=C
 COST_PER_KWH="0.2625"
 LIMIT="27.397"    # 10000 kWh / 365 days
 NOW="`LC_ALL=C date|sed -s 's/:/\\\\:/g'`"
+SEVENDAYSAGO="`LC_ALL=C date +%s --date='7 days ago 00:00'`"
 THIRTYDAYSAGO="`LC_ALL=C date +%s --date='30 days ago 00:00'`"
 SIXMONTHSAGO="`LC_ALL=C date +%s --date='180 days ago 00:00'`"
 
@@ -30,15 +31,24 @@ rrdgraph energy-60d.png \
   'VDEF:max=energy,MAXIMUM' \
   'VDEF:min=energy,MINIMUM' \
   'VDEF:last=energy,LAST' \
+  "CDEF:trend7d=0,1,$((60*60*24*7)),energy,PREDICT" \
+  "SHIFT:trend7d:$((60*60*24))" \
   "CDEF:trend30d=0,1,$((60*60*24*30)),energy,PREDICT" \
   "SHIFT:trend30d:$((60*60*24))" \
   'CDEF:trend30d1yearago=trend30d' \
   "SHIFT:trend30d1yearago:$((60*60*24*365))" \
+  'VDEF:avg7=trend7d,LAST' \
   'VDEF:avg=trend30d,LAST' \
+  'CDEF:_total_w=trend7d,7,*' \
+  'VDEF:total_w=_total_w,LAST' \
   'CDEF:_total_m=trend30d,30,*' \
   'VDEF:total_m=_total_m,LAST' \
   "CDEF:_cost1d=energy,${COST_PER_KWH},*" \
   'VDEF:cost1d=_cost1d,LAST' \
+  "CDEF:_cost7d=trend7d,${COST_PER_KWH},*" \
+  "CDEF:_cost7w=trend7d,7,${COST_PER_KWH},*,*" \
+  'VDEF:cost7d=_cost7d,LAST' \
+  'VDEF:cost7w=_cost7w,LAST' \
   "CDEF:_cost30d=trend30d,${COST_PER_KWH},*" \
   "CDEF:_cost30m=trend30d,30,${COST_PER_KWH},*,*" \
   'VDEF:cost30d=_cost30d,LAST' \
@@ -57,6 +67,12 @@ rrdgraph energy-60d.png \
   'GPRINT:last: %5.1lf kWh/d │\g' \
   'COMMENT:              │\g' \
   'GPRINT:cost1d: %4.1lf €/d\n' \
+  'LINE2:trend7d#ff8000c0:  7-day moving average │\g' \
+  'GPRINT:avg7:             %5.1lf kWh/d │\g' \
+  'GPRINT:total_w: %7.1lf kWh/w │\g' \
+  'GPRINT:cost7d: %4.1lf €/d' \
+  'GPRINT:cost7w: %5.1lf €/w\n' \
+  "VRULE:${SEVENDAYSAGO}#ffc080c0" \
   'LINE2:trend30d#0000ffc0:30-day moving average  │\g' \
   'GPRINT:avg:             %5.1lf kWh/d │\g' \
   'GPRINT:total_m: %6.1lf kWh/m │\g' \
@@ -75,6 +91,8 @@ rrdgraph energy-360d.png \
   'VDEF:max=energy,MAXIMUM' \
   'VDEF:min=energy,MINIMUM' \
   'VDEF:last=energy,LAST' \
+  "CDEF:trend7d=0,1,$((60*60*24*7)),energy,PREDICT" \
+  "SHIFT:trend7d:$((60*60*24))" \
   "CDEF:trend30d=0,1,$((60*60*24*30)),energy,PREDICT" \
   "SHIFT:trend30d:$((60*60*24))" \
   "CDEF:trend180d=0,1,$((60*60*24*180)),energy,PREDICT" \
@@ -83,14 +101,21 @@ rrdgraph energy-360d.png \
   "SHIFT:trend30d1yearago:$((60*60*24*365))" \
   'CDEF:trend180d1yearago=trend180d' \
   "SHIFT:trend180d1yearago:$((60*60*24*365))" \
+  'VDEF:avg7=trend7d,LAST' \
   'VDEF:avg30=trend30d,LAST' \
   'VDEF:avg180=trend180d,LAST' \
+  'CDEF:_total_w=trend7d,7,*' \
+  'VDEF:total_w=_total_w,LAST' \
   'CDEF:_total_m=trend30d,30,*' \
   'VDEF:total_m=_total_m,LAST' \
   'CDEF:_total_y=trend180d,365,*' \
   'VDEF:total_y=_total_y,LAST' \
   "CDEF:_cost1d=energy,${COST_PER_KWH},*" \
   'VDEF:cost1d=_cost1d,LAST' \
+  "CDEF:_cost7d=trend7d,${COST_PER_KWH},*" \
+  "CDEF:_cost7w=trend7d,7,${COST_PER_KWH},*,*" \
+  'VDEF:cost7d=_cost7d,LAST' \
+  'VDEF:cost7w=_cost7w,LAST' \
   "CDEF:_cost30d=trend30d,${COST_PER_KWH},*" \
   "CDEF:_cost30m=trend30d,30,${COST_PER_KWH},*,*" \
   'VDEF:cost30d=_cost30d,LAST' \
@@ -115,6 +140,12 @@ rrdgraph energy-360d.png \
   'GPRINT:last: %5.1lf kWh/d │\g' \
   'COMMENT:               │\g' \
   'GPRINT:cost1d: %4.1lf €/d\n' \
+  'LINE2:trend7d#ff8000c0:  7-day moving average │\g' \
+  'GPRINT:avg7:             %5.1lf kWh/d │\g' \
+  'GPRINT:total_w: %7.1lf kWh/w │\g' \
+  'GPRINT:cost7d: %4.1lf €/d' \
+  'GPRINT:cost7w: %5.1lf €/w\n' \
+  "VRULE:${SEVENDAYSAGO}#ffc080c0" \
   'LINE2:trend30d#0000ffc0: 30-day moving average │\g' \
   'GPRINT:avg30:             %5.1lf kWh/d │\g' \
   'GPRINT:total_m: %7.1lf kWh/m │\g' \
