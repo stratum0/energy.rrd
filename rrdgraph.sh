@@ -79,7 +79,7 @@ rrdgraph energy-60d.png \
   'GPRINT:cost30d: %4.1lf €/d' \
   'GPRINT:cost30m: %5.1lf €/m\n' \
   "VRULE:${THIRTYDAYSAGO}#8080ffc0:30 days ago\n" \
-  "LINE2:trend30d1yearago#80a0ffc0:30-day moving average, one year ago\n" \
+  "LINE1:trend30d1yearago#80a0ffc0:30-day moving average, one year ago\n" \
   "COMMENT:<span size='small' foreground='darkgray'>generated ${NOW}</span>\r" \
 
 
@@ -153,7 +153,7 @@ rrdgraph energy-360d.png \
   'GPRINT:cost30m: %5.1lf €/m' \
   "VRULE:${THIRTYDAYSAGO}#8080ffc0" \
   'COMMENT:             ' \
-  "LINE2:trend30d1yearago#80a0ffc0: 30-day moving average, one year ago\n" \
+  "LINE1:trend30d1yearago#80a0ffc0: 30-day moving average, one year ago\n" \
   'LINE2:trend180d#ff0000c0:180-day moving average │\g' \
   'GPRINT:avg180:             %5.1lf kWh/d │\g' \
   'GPRINT:total_y: %7.1lf kWh/y │\g' \
@@ -161,7 +161,7 @@ rrdgraph energy-360d.png \
   'GPRINT:cost180m: %4.1lf €/m' \
   'GPRINT:cost180y: %6.1lf €/y  ' \
   "VRULE:${SIXMONTHSAGO}#ff8080c0" \
-  "LINE2:trend180d1yearago#ff8080c0:180-day moving average, one year ago\n" \
+  "LINE1:trend180d1yearago#ff8080c0:180-day moving average, one year ago\n" \
   "HRULE:$LIMIT"'#ff4040c0:contractual limit of 10,000 kWh/y = 27.3 kWh/d\n:dashes' \
   "COMMENT:<span size='small' foreground='darkgray'>generated ${NOW}</span>\r" \
 
