@@ -1,6 +1,7 @@
 #!/bin/sh
 do_update=1
 do_rrdupdate=
+WEBROOT=/var/www/html/energy
 
 if [ "$1" = "-n" -o "$1" = "--no-update" ]; then
   do_update=
@@ -24,4 +25,4 @@ fi
 
 ./rrdgraph.sh
 
-cp energy-60d.png energy-360d.png /srv/www/stuff/stratum0/
+cp energy-60d.png energy-360d.png $WEBROOT
