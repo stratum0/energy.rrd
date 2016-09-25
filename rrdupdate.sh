@@ -11,10 +11,9 @@ fi
 tail -n +3 "$1" |
   sed 's/^\([0-9]\{4\}\)\/\([0-9]\{2\}\)\/\([0-9]\{2\}\)[ \t]\+[0-9:]\+,[ \t]\+\([0-9.]\+\)/\1\2\3@\4/' |
   tac |
-  xargs --verbose --no-run-if-empty -L1 -I'{}' \
-    /bin/sh -c 'if ! rrdtool update energy.rrd {}; then exit 0; fi'
-
-# Note: if last-update in energy.rrd is newer than our data, rrdtool will exit
-# with 255, which leads to xargs exiting immediately.
+  while read line; do
+    rrdtool update energy.rrd "$line" 2>&1 |
+      grep -v 'illegal attempt to update using time [0-9]\+'
+  done
 
 # vim: set sw=2 ts=2 et:
