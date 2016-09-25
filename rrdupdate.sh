@@ -6,6 +6,8 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+# regex: "YYYY/MM/DD HH:MM:SS, value" (csv) => "YYYYMMDD@value" (rrdtool update)
+# tail: cut off csv header and current (not yet complete) day
 tail -n +3 "$1" |
   sed 's/^\([0-9]\{4\}\)\/\([0-9]\{2\}\)\/\([0-9]\{2\}\)[ \t]\+[0-9:]\+,[ \t]\+\([0-9.]\+\)/\1\2\3@\4/' |
   tac |
