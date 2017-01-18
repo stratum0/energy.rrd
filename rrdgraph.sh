@@ -1,6 +1,6 @@
 #!/bin/sh
 LC_ALL=C
-COST_PER_KWH="0.2625"
+COST_PER_KWH="0.2775"
 LIMIT="27.397"    # 10000 kWh / 365 days
 NOW="`LC_ALL=C date|sed -s 's/:/\\\\:/g'`"
 SEVENDAYSAGO="`LC_ALL=C date +%s --date='7 days ago 00:00'`"
